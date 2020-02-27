@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 
   const Sequelize = sequelize.Sequelize;
   const Model = Sequelize.Model;
+  const bcrypt = require('bcrypt');
 
   class User extends Model{}
 
@@ -38,15 +39,20 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: DataTypes.STRING,
     role: DataTypes.STRING
-  }, { sequelize })
+  }, { 
+    hooks: {
+      afterValidate: (instance, options) => {
+        bcrypt.hash(instance.password, 10, function(err, hash) {
+          if(err){
+            console.log(err)
+          }
+          instance.password = hash
+        });
+      }
+    },
+    sequelize 
+  })
 
-  // var User = sequelize.define('User', {
-  //   first_name: DataTypes.STRING,
-  //   last_name: DataTypes.STRING,
-  //   email: DataTypes.STRING,
-  //   password: DataTypes.STRING,
-  //   role: DataTypes.STRING
-  // }, {});
   User.associate = function(models) {
     // associations can be defined here
   };
