@@ -1,36 +1,37 @@
-const { Food } = require('../models')
+const { Restaurant } = require('../models')
 
-class FoodController {
+class RestaurantController {
     static show(req, res) {
-        Food.findAll()
+        Restaurant.findAll()
             .then(data => {
-                res.render('foods', { data })
+                res.render('restaurant', { data })
             }).catch(err => {
                 res.send(err)
             })
     }
 
     static addForm(req, res) {
-        res.render('addFormFood')
+        res.render('addFormRestaurant')
     }
     
     static add(req, res) {
         let obj = {
             name: req.body.name,
-            calories: req.body.calories,
+            address: req.body.address,
+            phone: req.body.phone
         }
         Food.create(obj)
             .then(data => {
-                res.redirect('/foods')
+                res.redirect('/restaurants')
             }).catch(err => {
                 res.json(err)
             })
     }
     static editForm(req, res) {
         let id = req.params.id
-        Food.findOne(id)
+        Restaurant.findOne(id)
             .then(data => {
-                res.render('editFormFood', { data })
+                res.render('editFormRestaurant', { data })
             }).catch(err => {
                 res.json(err)
             })
@@ -39,7 +40,8 @@ class FoodController {
     static edit(req, res) {
         let obj = {
             name: req.body.name,
-            calories: req.body.calories
+            address: req.body.address,
+            phone: req.body.phone
         }
         let id = {
             where: {
@@ -48,7 +50,7 @@ class FoodController {
         }
         Food.update(obj, id)
             .then(data => {
-                req.redirect('/foods')
+                req.redirect('/restaurants')
             }).catch(err => {
                 res.send(err)
             })
@@ -57,11 +59,11 @@ class FoodController {
         let id = req.params.id
         Food.destroy(id)
             .then(data => {
-                res.redirect('/foods')
+                res.redirect('/restaurants')
             }).catch(err => {
                 res.send(err)
             })
     }
 }
 
-module.exports = FoodController
+module.exports = RestaurantController
