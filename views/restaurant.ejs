@@ -14,14 +14,17 @@
     <h1>Foods</h1>
     <table border ="1">
         <tr>
-            <th>Food</th>
-            <th>Calories</th>
+            <th>Restaurant Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <th>Action</th>
         </tr>
         <% for(let i = 0; i < data.length; i++) { %>
             <tr>
                 <td><%= data[i].name%></td>
                 <td><%= data[i].address%></td>
                 <td><%= data[i].phone%></td>
+                <td><button><a href="/retaurants/edit/<%= data[i].id %>">Edit</a></button> <button><a href="/restaurants/delete/<%= data[i].id %>">delete</a></button></td>
             </tr>
         <% } %>
     </table>

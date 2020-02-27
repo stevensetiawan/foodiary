@@ -16,11 +16,13 @@
         <tr>
             <th>Food</th>
             <th>Calories</th>
+            <th>Action</th>
         </tr>
         <% for(let i = 0; i < data.length; i++) { %>
             <tr>
                 <td><%= data[i].name%></td>
                 <td><%= data[i].calories%></td>
+                <td><button><a href="/foods/edit/<%= data[i].id %>">Edit</a></button> <button><a href="/foods/delete/<%= data[i].id %>">delete</a></button></td>
             </tr>
         <% } %>
     </table>

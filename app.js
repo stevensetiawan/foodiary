@@ -5,6 +5,7 @@ const port = 3002;
 
 const foodRoute = require('./router/foodRoute')
 const userRoute = require('./router/userRoute')
+const restaurantRoute = require('./router/restaurantRoute')
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }))
@@ -21,7 +22,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/foods', foodRoute)
-
+app.use('/restaurants', restaurantRoute)
 app.use('/user', userRoute)
 
 

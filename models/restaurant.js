@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
   class Restaurant extends models{
 
   }
-  Restaurant.ini(
+  Restaurant.init(
     {
       name: DataTypes.STRING,
       address: DataTypes.STRING,

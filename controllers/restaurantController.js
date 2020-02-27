@@ -13,14 +13,14 @@ class RestaurantController {
     static addForm(req, res) {
         res.render('addFormRestaurant')
     }
-    
+
     static add(req, res) {
         let obj = {
             name: req.body.name,
             address: req.body.address,
             phone: req.body.phone
         }
-        Food.create(obj)
+        Restaurant.create(obj)
             .then(data => {
                 res.redirect('/restaurants')
             }).catch(err => {
@@ -28,7 +28,11 @@ class RestaurantController {
             })
     }
     static editForm(req, res) {
-        let id = req.params.id
+        let id = {
+            where: {
+                id: req.params.id
+            }
+        }
         Restaurant.findOne(id)
             .then(data => {
                 res.render('editFormRestaurant', { data })
@@ -48,7 +52,7 @@ class RestaurantController {
                 id: req.params.id
             }
         }
-        Food.update(obj, id)
+        Restaurant.update(obj, id)
             .then(data => {
                 req.redirect('/restaurants')
             }).catch(err => {
@@ -56,8 +60,12 @@ class RestaurantController {
             })
     }
     static delete(req, res) {
-        let id = req.params.id
-        Food.destroy(id)
+        let id = {
+            where:{
+                id:req.params.id
+            }
+        }        
+        Restaurant.destroy(id)
             .then(data => {
                 res.redirect('/restaurants')
             }).catch(err => {
