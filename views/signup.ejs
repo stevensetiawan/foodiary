@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Diary</title>
     <style>
+        .Error{
+            border: 2px solid red
+        }
     </style>
 </head>
 <body>
     <h1>Sign Up</h1>
     <form action="/user/signup" method="POST">
         <label>First Name:</label><br>
-        <input type="text" name="first_name"><br>
+        <input type="text" name="first_name" class="<%= error.first_name? 'Error' : ''%>" value="<%= error.first_name? `${error.first_name.msg}` : ''%>"><br>
         <label>Last Name:</label><br>
         <input type="text" name="last_name"><br>
         <label>Email:</label><br>
-        <input type="text" name="email"><br>
+        <input type="text" name="email" class="<%= error.email? 'Error' : ''%>" value="<%= error.email? `${error.email.msg}` : ''%>"><br>
         <label>Password:</label><br>
         <input type="password" id="lname" name="password"><br>
         <button type="submit">Sign Up</button>

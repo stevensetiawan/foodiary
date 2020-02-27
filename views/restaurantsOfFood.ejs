@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Diary</title>
+    <style>
+        th, td{
+            padding: 10px 10px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header', { user }) %>
+    <h1>Restaurant That Sells <%=dataFood.name%></h1>
+    <table border ="1">
+        <tr>
+            <th>Restaurant Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+        </tr>
+        <% for(let i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%= data[i].Restaurant.name%></td>
+                <td><%= data[i].Restaurant.address%></td>
+                <td><%= data[i].Restaurant.phone%></td>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>
