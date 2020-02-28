@@ -5,7 +5,9 @@ class FoodController{
         let user = req.session.user
         Food.findAll()
         .then( data => {
-            
+            data.sort((a,b) => {
+                return a.id - b.id
+            })
             res.render('foods', { data, user })
         }).catch(err => {
             res.send(err)
@@ -49,7 +51,7 @@ class FoodController{
         let id = Number(req.params.id)
         Food.update(obj,{where: {id}})
         .then(data => {
-                req.redirect('/foods')
+                res.redirect('/foods')
         }).catch(err => {
                 res.send('ini dari error')
         })

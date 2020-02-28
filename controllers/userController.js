@@ -19,7 +19,8 @@ const transporter = nodemailer.createTransport({
 class UserController {
     static signUp (req, res){
         let error = {}
-        res.render('signup', {error})
+        let user = req.session.user
+        res.render('signup', {error, user})
     }
     static addUser(req, res){
         let first_name = req.body.first_name;
@@ -88,7 +89,8 @@ class UserController {
         })
     }
     static loginForm(req, res){
-        res.render('login', {error: {}})
+        let user = req.session.user
+        res.render('login', {error: {}, user})
     }
     static profile(req, res){
         let id = Number(req.params.id);
@@ -149,7 +151,6 @@ class UserController {
                 }
             })
             let text = getReport(report, userdata, calories)
-            console.log(text)
             let mailOptions = {
                 from: 'foodiary@gmail.com',
                 to: userdata.email,

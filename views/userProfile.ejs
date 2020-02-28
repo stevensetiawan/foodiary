@@ -5,13 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Foodiary</title>
     <style>
+        <%- include('partials/style')%>
+        table{
+            margin: 20px auto;
+        }
         th, td{
             padding: 10px 15px
+        }
+        form{
+            width: 300px; height: auto; border: 2px solid rgb(250, 171, 24); border-radius: 10px; margin: 40px auto; padding: 30px 10px;
+        }
+        label{
+            font-size: 18px; margin-bottom: 10px;
+        }
+        select{
+            margin-top: 10px; width: 130px; height: 25px; font-size: 14px; margin-bottom: 15px;
+        }
+        button{
+            width: 100px; height: 30px; background-color:rgb(250, 171, 24); color: whitesmoke; border-radius: 5px; font-size: 14px; margin-bottom: 5px;
+        }
+        p{
+            font-size: 18px;
+        }
+        a{
+            font-size: 18px; margin: 40px 0;
+        }
+        .header{
+            border-bottom: 2px solid rgb(179, 175, 175);
         }
     </style>
 </head>
 <body>
-    <%- include('partials/header', {user}) %>
+    <%- include('partials/header', {user, page: 'profile'}) %>
     <h1>Hallo <%= user.name %></h1>
     <form action="/user/profile/<%=user.id%>" method="POST">
         <label>Makan apa kamu hari ini?</label><br>
@@ -19,12 +44,12 @@
             <% for(let i = 0; i < foods.length; i++) {%>
                 <option value="<%=foods[i].id%>"><%=foods[i].name%></option>
             <%}%>
-        </select>
+        </select><br>
         <button type="submit">Add Food</button>
     </form>
-    <p>you have gained <%= calories %> calories today</p>
+    <p>You have gained <%= calories %> calories today</p>
     <% if(calories > 2000) {%>
-        <p style="color: red">Kalori kamu sudah melebihi 2000!!</p>
+        <p style="color: red">Kalori kamu sudah melebihi 2000 kalori hari ini!!</p>
     <%}%>
     <a href="/user/profile/<%= user.id%>/sendMail"><buton>Send Me Today's Report</buton></a>
     <h2>Your Food History</h2>
@@ -42,6 +67,6 @@
             </tr>
         <%}%>
     </table>
-    <a href="/user/logout" >Sign Out</a>
+    <a href="/user/logout" style="text-decoration: none; color:rgb(250, 171, 24); font-weight: bold; font-size: 20px; padding-bottom: 30px;">Sign Out</a>
 </body>
 </html>

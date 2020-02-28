@@ -5,6 +5,9 @@ class RestaurantController {
         let user = req.session.user;
         Restaurant.findAll()
             .then(data => {
+                data.sort((a,b) => {
+                    return a.id-b.id
+                })
                 res.render('restaurant', { data, user })
             }).catch(err => {
                 res.send(err)
@@ -55,7 +58,7 @@ class RestaurantController {
         }
         Restaurant.update(obj, id)
             .then(data => {
-                req.redirect('/restaurants')
+                res.redirect('/restaurants')
             }).catch(err => {
                 res.send(err)
             })

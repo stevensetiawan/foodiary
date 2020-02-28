@@ -5,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Diary</title>
     <style>
+         <%- include('partials/style') %>
         .Error{
             color:red
+        }
+        form{
+            width: 300px; height: auto; border: 2px solid rgb(250, 171, 24); border-radius: 10px; margin: 20px auto; padding: 30px 10px;
+        }
+        input, button{
+            margin-top: 10px; margin-bottom: 20px;
+        }
+        input{
+            border-radius: 5px; width: 200px; height: 26px; font-size: 14px;
+        }
+        button{
+            width: 60px; height: 30px; background-color:rgb(250, 171, 24); color: whitesmoke; border-radius: 5px; font-size: 14px; margin-bottom: 5px;
+        }
+        h1{
+            margin-bottom: 20px;
+        }
+        a{
+            text-decoration: none; color: black; font-size: 20px;
         }
     </style>
 </head>
 <body>
+    <%- include('partials/header', {user, page: 'sign-in'})%>
     <h1>Sign In</h1>
     <form action="/user/login" method="POST">
         <label>Email:</label><br>

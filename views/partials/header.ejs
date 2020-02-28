@@ -1,34 +1,12 @@
-<header id="header" class="fixed-top">
-    <div class="container-fluid d-flex">
-
-      <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html"><span>Foodiary</span></a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
-
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"><a href="#header">Home</a></li>
-          <li><a href="#about">Food</a></li>
-          <li><a href="#services">Restaurant</a></li>
-          <% if(user) {%>
-                <li><a href="/user/profile/<%=user.id%>">Profile</a></li>
-            <%}else{%>
-                <li><a href="/user/login">Sign In</a></li>
-            <% } %>
-        </ul>
-    </nav>
-</header>
-
-<!-- <div class = "hedaer">
-    <div class ="navbar">
-        <a href="/foods">Foods</a>
-        <a href="/restaurants">Restaurants</a>
+<div class = "header">
+    <div class ="navbar" style="text-align: left;">
+        <a href="/" class="<%= page === 'home' ? 'active': ''%>">Home</a>
+        <a href="/foods" class="<%= page === 'foods' ? 'active': ''%>">Foods</a>
+        <a href="/restaurants" class="<%= page === 'restaurants' ? 'active': ''%>">Restaurants</a>
         <% if(user) {%>
-            <a href="/user/profile/<%=user.id%>">Profile</a>
+            <a href="/user/profile/<%=user.id%>" class="<%= page === 'profile' ? 'active': ''%>">Profile</a>
         <%}else{%>
-            <a href="/user/login">Sign In</a>
+            <a href="/user/login" class="<%= page === 'sign-in' ? 'active': ''%>">Sign In</a>
         <% } %>
     </div>
-</div> -->
+</div>
