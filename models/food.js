@@ -32,6 +32,9 @@ module.exports = (sequelize, DataTypes) => {
 
   Food.associate = function(models) {
     // associations can be defined here
+    Food.hasMany(models.UserFood, {foreignKey: 'FoodId'})
+    Food.hasMany(models.FoodRestaurant, {foreignKey: 'FoodId'})
+    // Food.belongsToMany(models.Restaurant, {through: models.FoodRestaurant}) 
   };
   return Food;
 };

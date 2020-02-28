@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Diary</title>
+    <style>
+         <%- include('partials/style') %>
+        table{
+            margin: 10px auto;
+        }
+        th, td{
+            padding: 10px 10px;
+        }
+        a {
+            text-decoration: none;
+        }
+        h1{
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header', { user, page: 'restaurants' }) %>
+    <h1>Restaurants</h1>
+    <% if(user) {%>
+        <% if(user.role === 'admin') {%>
+            <a href="/restaurants/add">Add restaurant</a>
+        <%}%>
+    <%}%>
+    <table border ="1">
+        <tr>
+            <th>Restaurant Name</th>
+            <th>Address</th>
+            <th>Phone Number</th>
+            <% if(user) {%>
+                <% if(user.role === 'admin') {%>
+                    <th>Action</th>
+                <%}%>
+            <%}%>
+        </tr>
+        <% for(let i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%= data[i].name%></td>
+                <td><%= data[i].address%></td>
+                <td><%= data[i].phone%></td>
+                <% if(user) {%>
+                    <% if(user.role === 'admin') {%>
+                        <td><button><a href="/restaurants/edit/<%= data[i].id %>">Edit</a></button> <button><a href="/restaurants/delete/<%= data[i].id %>">delete</a></button></td>
+                    <%}%>
+                <%}%>
+            </tr>
+        <% } %>
+    </table>
+</body>
+</html>

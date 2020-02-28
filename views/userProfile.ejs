@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foodiary</title>
+    <style>
+        <%- include('partials/style')%>
+        table{
+            margin: 20px auto;
+        }
+        th, td{
+            padding: 10px 15px
+        }
+        form{
+            width: 300px; height: auto; border: 2px solid rgb(250, 171, 24); border-radius: 10px; margin: 40px auto; padding: 30px 10px;
+        }
+        label{
+            font-size: 18px; margin-bottom: 10px;
+        }
+        select{
+            margin-top: 10px; width: 130px; height: 25px; font-size: 14px; margin-bottom: 15px;
+        }
+        button{
+            width: 100px; height: 30px; background-color:rgb(250, 171, 24); color: whitesmoke; border-radius: 5px; font-size: 14px; margin-bottom: 5px;
+        }
+        p{
+            font-size: 18px;
+        }
+        a{
+            font-size: 18px; margin: 40px 0;
+        }
+        h1{
+            margin-top: 60px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header', {user, page: 'profile'}) %>
+    <h1>Hallo <%= user.name %></h1>
+    <form action="/user/profile/<%=user.id%>" method="POST">
+        <label>Makan apa kamu hari ini?</label><br>
+        <select name="FoodId">
+            <% for(let i = 0; i < foods.length; i++) {%>
+                <option value="<%=foods[i].id%>"><%=foods[i].name%></option>
+            <%}%>
+        </select><br>
+        <button type="submit">Add Food</button>
+    </form>
+    <p>You have gained <%= calories %> calories today</p>
+    <% if(calories > 2000) {%>
+        <p style="color: red">Kalori kamu sudah melebihi 2000 kalori hari ini!!</p>
+    <%}%>
+    <a href="/user/profile/<%= user.id%>/sendMail"><button style="width: 200px; border-radius: 15px;">Send Me Today's Report</button></a>
+    <h2>Your Food History</h2>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Calories</th>
+            <th>Date when you eat</th>
+        </tr>
+        <% for (let i = 0; i < foodsOfUser.length; i++) {%>
+            <tr>
+              <td><%= foodsOfUser[i].Food.name%></td>
+              <td><%= foodsOfUser[i].Food.calories%></td>
+              <td><%= foodsOfUser[i].createdAt.toDateString() %></td>
+            </tr>
+        <%}%>
+    </table>
+    <a href="/user/logout" style="text-decoration: none; color:rgb(250, 171, 24); font-weight: bold; font-size: 20px; padding-bottom: 30px;">Sign Out</a>
+</body>
+</html>

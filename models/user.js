@@ -5,7 +5,11 @@ module.exports = (sequelize, DataTypes) => {
   const Model = Sequelize.Model;
   const bcrypt = require('bcrypt');
 
-  class User extends Model{}
+  class User extends Model{
+    getFullName(){
+      return `${this.first_name} ${this.last_name}`
+    }
+  }
 
   User.init({
     first_name: {
@@ -23,38 +27,27 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       validate: {
-        isEmailUnique: function (value) {
-          let check = false;
-          User.findAll({where: {email: value}})
-          .then(data => {
-            if(data.length !== 0) {
-              check = true
-            }
-            if(check){
-              throw new Error ('Email has been used')
-            }
-          })
-        }
+        notEmpty: true
       }
     },
     password: DataTypes.STRING,
     role: DataTypes.STRING
   }, { 
     hooks: {
-      afterValidate: (instance, options) => {
-        bcrypt.hash(instance.password, 10, function(err, hash) {
-          if(err){
-            console.log(err)
-          }
+      beforeCreate: (instance, options) => {
+        return bcrypt.hash(instance.password, 8)
+        .then(function(hash) {
+          // Store hash in your password DB.
           instance.password = hash
         });
-      }
+        }
     },
     sequelize 
   })
 
   User.associate = function(models) {
     // associations can be defined here
+    User.hasMany(models.UserFood, {foreignKey: 'UserId'})
   };
   return User;
 };

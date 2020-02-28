@@ -1,0 +1,12 @@
+<div class = "header">
+    <div class ="navbar" style="text-align: left;">
+        <a href="/" class="<%= page === 'home' ? 'active': ''%>">Home</a>
+        <a href="/foods" class="<%= page === 'foods' ? 'active': ''%>">Foods</a>
+        <a href="/restaurants" class="<%= page === 'restaurants' ? 'active': ''%>">Restaurants</a>
+        <% if(user) {%>
+            <a href="/user/profile/<%=user.id%>" class="<%= page === 'profile' ? 'active': ''%>">Profile</a>
+        <%}else{%>
+            <a href="/user/login" class="<%= page === 'sign-in' ? 'active': ''%>">Sign In</a>
+        <% } %>
+    </div>
+</div>
