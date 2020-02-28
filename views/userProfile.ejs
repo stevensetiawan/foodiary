@@ -30,8 +30,8 @@
         a{
             font-size: 18px; margin: 40px 0;
         }
-        .header{
-            border-bottom: 2px solid rgb(179, 175, 175);
+        h1{
+            margin-top: 60px;
         }
     </style>
 </head>
@@ -51,7 +51,7 @@
     <% if(calories > 2000) {%>
         <p style="color: red">Kalori kamu sudah melebihi 2000 kalori hari ini!!</p>
     <%}%>
-    <a href="/user/profile/<%= user.id%>/sendMail"><buton>Send Me Today's Report</buton></a>
+    <a href="/user/profile/<%= user.id%>/sendMail"><button style="width: 200px; border-radius: 15px;">Send Me Today's Report</button></a>
     <h2>Your Food History</h2>
     <table border="1">
         <tr>

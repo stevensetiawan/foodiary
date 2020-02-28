@@ -46,6 +46,7 @@ class UserController {
             res.redirect('/foods')
         }).catch(err => {
             let error = {}
+            let user = req.session.user
             if(err.errors){
                 err.errors.forEach((item) => {
                     error[item.path] = {
@@ -57,7 +58,7 @@ class UserController {
                     msg: err.message
                 }
             }
-            res.render('signup', {error})
+            res.render('signup', {error, user})
         })
     }
     static logIn(req, res){
@@ -83,8 +84,9 @@ class UserController {
                 throw new Error ('Wrong email')
             }
         }).catch(err => {
+            let user = req.session.user
             if(err.message){
-                res.render('login', {error: {msg: err.message}})
+                res.render('login', {error: {msg: err.message}, user})
             }
         })
     }
