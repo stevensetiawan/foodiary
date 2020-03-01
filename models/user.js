@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     role: DataTypes.STRING
   }, { 
     hooks: {
-      beforeCreate: (instance, options) => {
+      beforeSave: (instance, options) => {
         return bcrypt.hash(instance.password, 8)
         .then(function(hash) {
           // Store hash in your password DB.
