@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const session = require('express-session')
-const port = process.env.PORT || 3002;
+const port = /*process.env.PORT ||*/ 3002;
 
 const foodRoute = require('./router/foodRoute')
 const userRoute = require('./router/userRoute')

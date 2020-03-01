@@ -11,8 +11,6 @@ const transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL,
         pass: process.env.PASSWORD
-        // user: 'adhiyatma.pramayoga@gmail.com',
-        // pass: '25juli98'
     }
 })
 
@@ -104,6 +102,9 @@ class UserController {
             return UserFood.findAll({where: {UserId: id}, include: Food})
         })
         .then(foodsOfUser => {
+            foodsOfUser.sort((a,b) => {
+                return b.id - a.id
+            })
             let calories = getCaloriesToday(foodsOfUser);
             res.render('userProfile', { user, foods, foodsOfUser, calories })
 

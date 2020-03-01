@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       }
-    }
+    },
+    image: DataTypes.STRING
   }, { sequelize })
 
   Food.associate = function(models) {
