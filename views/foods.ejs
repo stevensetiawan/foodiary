@@ -16,7 +16,20 @@
             text-decoration: none;
         }
         h1{
-            margin-top: 60px;
+            margin-top: 60px; font-size: 45px; text-transform: uppercase; 
+        }
+        .card{
+            width: 25%; height: auto; border-radius: 20px; border: 3px solid rgb(250, 171, 24); margin: 10px auto; text-align: left; margin: 40px 60px; position: relative;
+            box-shadow: 0px 10px 15px 0px grey;
+        }
+        .card:hover{
+            bottom: 17px
+        }
+        .card p{
+            padding-left: 20px; padding-right: 10px;
+        }
+        .card button{
+            margin-bottom: 15px; margin-left: 20px; font-size: 15px; border-radius: 5px; padding: 5px 10px; width: auto; background-color: rgb(250, 171, 24);
         }
     </style>
 </head>
@@ -25,31 +38,25 @@
     <h1>Foods</h1>
     <% if(user) {%>
         <% if(user.role === 'admin') {%>
-            <a href="/foods/add">Add Food</a>
+            <div style="width: 100%">
+            <a href="/foods/add" style="font-size: 20px; color: rgb(250, 171, 24);">Add Food</a>
+            </div>
         <%}%>
     <%}%>
-    <table border ="1">
-        <tr>
-            <th>Food</th>
-            <th>Calories</th>
-            <% if(user) {%>
-                <% if(user.role === 'admin') {%>
-                    <th>Action</th>
-                <%}%>
-            <%}%>
-        </tr>
-        <% for(let i = 0; i < data.length; i++) { %>
-            <tr>
-                <td><a href="/foods/<%=data[i].id%>/restaurants"><%= data[i].name%></a></td>
-                <td><%= data[i].calories%></td>
+    <% for(let i = 0; i < data.length; i++) { %>
+        <a href="/foods/<%=data[i].id%>/restaurants" style="width: 26%">
+            <div class = "card" style="float: <%= (i+3)%3 === 0? 'left' : (i+3)%3 === 1? 'left': (i+3)%3 === 2 ? 'right' : ''%>; <%= (i+3)%3 === 1? 'margin: 40px 51px;' : '' %>">
+                <img src="<%= data[i].image%>" style="margin: 0; width: 100%; border-top-right-radius: 17px; border-top-left-radius: 17px;">
+                <p style="font-size: 23px; margin-bottom: 0; color: rgb(250, 171, 24); font-weight: bold; margin-top: 8px; letter-spacing: 1px;"><%=data[i].name%></p>
+                <p style="color: grey; margin-top: 8px;"><%=data[i].calories%> calories</p>
                 <% if(user) {%>
                     <% if(user.role === 'admin') {%>
-                        <td><button><a href="/foods/edit/<%= data[i].id %>">Edit</a></button> <button><a href="/foods/delete/<%= data[i].id %>">delete</a></button></td>
-                     <%}%>
+                        <button><a href="/foods/edit/<%= data[i].id %>" style="color: whitesmoke">Edit</a></button> 
+                        <button style="margin-left: 10px; background-color: red;"><a href="/foods/delete/<%= data[i].id %>" style="color: whitesmoke">Delete</a></button>
+                    <%}%>
                 <%}%>
-            </tr>
-        <% } %>
-    </table>
-    <%- include('partials/script') %>
+            </div>
+        </a>
+    <% } %>
 </body>
 </html>
