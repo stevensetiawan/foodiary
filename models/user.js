@@ -37,10 +37,15 @@ module.exports = (sequelize, DataTypes) => {
       beforeSave: (instance, options) => {
         return bcrypt.hash(instance.password, 8)
         .then(function(hash) {
-          // Store hash in your password DB.
           instance.password = hash
         });
-        }
+      },
+      beforeBulkCreate: (instance, options) => {
+        return bcrypt.hash(instance.password, 8)
+        .then(function(hash) {
+          instance.password = hash
+        });
+      }
     },
     sequelize 
   })
